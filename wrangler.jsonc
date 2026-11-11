@@ -1,0 +1,22 @@
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "github-index-manager",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-11",
+
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+
+  "kv_namespaces": [
+    {
+      "binding": "HISTORY_KV",
+      "id": "GANTI_DENGAN_KV_NAMESPACE_ID"
+    }
+  ]
+}
