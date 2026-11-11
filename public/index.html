@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c0911">
+  <title>GitHub Index Manager</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="logo">G</div>
+      <div class="eyebrow">PRIVATE ADMINISTRATION</div>
+      <h1>Index Manager</h1>
+      <p class="muted">Login untuk mengakses GitHub repository manager.</p>
+
+      <form id="loginForm">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Masukkan password"
+          autocomplete="current-password"
+          required
+        >
+        <button class="btn primary full" id="loginButton">
+          Masuk Dashboard
+        </button>
+      </form>
+
+      <p id="loginError" class="error-text"></p>
+      <div class="login-footer">SECURE ACCESS · GITHUB MANAGER</div>
+    </div>
+  </section>
+
+  <main id="dashboard" class="dashboard hidden">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-logo">G</div>
+        <div>
+          <strong>INDEX MANAGER</strong>
+          <span>GITHUB CONTROL PANEL</span>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <span class="online"><i></i> SYSTEM ONLINE</span>
+        <button id="logoutButton" class="btn secondary small">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <section class="welcome">
+      <div>
+        <div class="eyebrow">DASHBOARD</div>
+        <h1>Repository Manager</h1>
+        <p class="muted">Kelola file index.html dari satu tempat.</p>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-card">
+        <span>Repository</span>
+        <strong>03</strong>
+        <small>Terdaftar</small>
+      </div>
+
+      <div class="stat-card">
+        <span>Total Update</span>
+        <strong id="totalUpdates">0</strong>
+        <small>Berhasil</small>
+      </div>
+
+      <div class="stat-card">
+        <span>Status</span>
+        <strong class="ready">READY</strong>
+        <small>API Manager</small>
+      </div>
+    </section>
+
+    <section class="main-grid">
+
+      <aside class="panel repository-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Repository</h2>
+            <p>Pilih tujuan update</p>
+          </div>
+          <span class="count">03</span>
+        </div>
+
+        <div class="repository-list">
+
+          <button class="repository active" data-repo="orderiky">
+            <div class="repo-icon">O</div>
+            <div class="repo-info">
+              <strong>ORDERIKY</strong>
+              <span>orderikystore</span>
+            </div>
+            <span class="repo-check">✓</span>
+          </button>
+
+          <button class="repository" data-repo="apkprem">
+            <div class="repo-icon">A</div>
+            <div class="repo-info">
+              <strong>APKPREM</strong>
+              <span>apkpremiky</span>
+            </div>
+            <span class="repo-check">✓</span>
+          </button>
+
+          <button class="repository" data-repo="botwhatsapp">
+            <div class="repo-icon">B</div>
+            <div class="repo-info">
+              <strong>BOTWHATSAPP</strong>
+              <span>ikystoreproduk</span>
+            </div>
+            <span class="repo-check">✓</span>
+          </button>
+
+        </div>
+
+        <div class="repository-note">
+          <span>ⓘ</span>
+          Hanya tiga repository yang terdaftar yang dapat dikelola.
+        </div>
+      </aside>
+
+      <section class="panel editor-panel">
+
+        <div class="editor-heading">
+          <div>
+            <div class="eyebrow">SELECTED REPOSITORY</div>
+            <h2 id="selectedName">ORDERIKY</h2>
+            <p id="selectedRepo">Uband-Whatsapp/orderikystore</p>
+          </div>
+          <span class="branch-badge">MAIN</span>
+        </div>
+
+        <div class="editor-toolbar">
+          <div>
+            <strong>Code Editor</strong>
+            <span>index.html</span>
+          </div>
+          <button id="reloadButton" class="btn secondary small">
+            ↻ Muat ulang
+          </button>
+        </div>
+
+        <div class="code-container">
+          <div class="code-top">
+            <span>●</span>
+            <span>●</span>
+            <span>●</span>
+            <small>HTML SOURCE</small>
+          </div>
+
+          <textarea
+            id="codeEditor"
+            spellcheck="false"
+            placeholder="Memuat kode HTML..."
+            disabled
+          ></textarea>
+        </div>
+
+        <div class="commit-field">
+          <label for="commitMessage">Commit message</label>
+          <input
+            id="commitMessage"
+            type="text"
+            maxlength="100"
+            value="Update index.html via Index Manager"
+          >
+        </div>
+
+        <div class="editor-actions">
+          <button id="previewButton" class="btn secondary">
+            Preview
+          </button>
+          <button id="updateButton" class="btn primary">
+            Update index.html →
+          </button>
+        </div>
+
+        <div id="previewContainer" class="preview-container hidden">
+          <div class="preview-heading">
+            <strong>Website Preview</strong>
+            <button id="closePreview" class="btn secondary small">Tutup</button>
+          </div>
+          <iframe
+            id="previewFrame"
+            title="HTML Preview"
+            sandbox=""
+          ></iframe>
+          <p class="muted preview-note">
+            Preview dinonaktifkan dari akses JavaScript dan jaringan.
+          </p>
+        </div>
+
+      </section>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Riwayat Update</h2>
+          <p>Aktivitas perubahan repository</p>
+        </div>
+        <button id="refreshHistory" class="btn secondary small">
+          ↻ Refresh
+        </button>
+      </div>
+
+      <div class="history-table">
+        <div class="history-header">
+          <span>REPOSITORY / DETAIL</span>
+          <span>STATUS</span>
+        </div>
+        <div id="historyList">
+          <div class="empty-state">Memuat riwayat...</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      GITHUB INDEX MANAGER
+      <span>Private Administration System</span>
+    </footer>
+
+  </main>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <div id="confirmModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-icon">!</div>
+      <h2>Konfirmasi Update</h2>
+      <p id="confirmDescription">
+        Anda akan memperbarui index.html.
+      </p>
+      <div class="modal-actions">
+        <button id="cancelUpdate" class="btn secondary">Batal</button>
+        <button id="confirmUpdate" class="btn primary">Ya, Update</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>
